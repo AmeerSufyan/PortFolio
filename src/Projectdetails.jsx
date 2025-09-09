@@ -23,6 +23,15 @@ import product from './Freshcartpics/cartProduct.png';
 import orderDetail from './Freshcartpics/cartorderDetail.png';
 import checkout from './Freshcartpics/cartcheckout1.png';
 import contactform from './Freshcartpics/cartcontactform.png';
+import gist1 from './gist1.png';
+import gist2 from './gist2.png';
+import gist3 from './gist3.png';
+import gist4 from './gist4.png';
+import blog1 from './bloghome.png';
+import blog2 from './blogdetail.png';
+import blog3 from './blogcreate.png';
+import blog4 from './editblog.png';
+
 
 import {motion} from 'framer-motion';
 import Slider from 'react-slick';
@@ -33,6 +42,8 @@ const ProjectDetails = () => {
         const images = [pic1, pic2, pic3, pic4, pic5, pic6, pic7]
     const FreshcartImages = [cartpic1, cartpic2, cartpic3, cartpic4, cartpic5, cartpic6,  cartpic7, cartpic8, cartpic9]
     const backend_images = [category, product, orderDetail, checkout, contactform]
+    const gist_images = [gist1, gist2, gist3, gist4]
+    const blog_images = [blog1, blog2, blog3, blog4]
     const {projectDetail} = useParams();
     const [imageWidth, setImageWidth] = useState(null);
 
@@ -106,7 +117,7 @@ const ProjectDetails = () => {
     
         <div className='bg-[#0f3430]  h-full py-32 text-white px-4 md:px-10 lg:px-40 '>
                <h2><strong>Project Title: </strong>FreshCart</h2>
-            <p><strong>Project Description:</strong> The E-Commerce Store <strong>FreshCart</strong> is a full-featured online shopping platform that
+            <p><strong>Project Description:</strong>The E-Commerce Store <strong>FreshCart</strong> is a full-featured online shopping platform that
                  allows users to browse products, manage a shopping cart, customer contact with owner, and place orders. The application is
                   built using React.js for a dynamic frontend and Django with MySQL for a secure and scalable 
                   backend. Styling is handled using Tailwind CSS for a clean, responsive UI.
@@ -147,7 +158,61 @@ const ProjectDetails = () => {
             </div>
              </div>
             )}
-           
+
+               {projectDetail === 'gists' && (
+    
+        <div className='bg-[#0f3430]  h-full py-32 text-white px-4 md:px-10 lg:px-40 '>
+               <h2><strong>Project Title: </strong>Github Gists</h2>
+            <p><strong>Project Description:</strong> Github <strong>Gists</strong> The primary goal of this project
+             was to gain hands-on experience working with real-world APIs—specifically, the GitHub Gist API—and 
+             to build a modern, user-friendly frontend interface using React.js.
+            </p>
+            <div>
+                <Slider {...settings}>
+                {gist_images.map((img, index) => (
+                    <motion.div
+                    initial = {{opacity: 0, scale:0.8}}
+                    whileInView = {{opacity: 1, scale: 1}}
+                    transition = {{duration: 1}}
+                    viewport = {{once: true}}
+                    key={index}
+                    className='px-4 mt-6 pb-5'
+                    >  
+                   <img src={img} alt=""  onClick={() => setImageWidth(img)}/>
+                      </motion.div>
+                ))}
+           </Slider>
+            </div>
+            </div>  
+           )}
+
+            {projectDetail === 'blogPost' && (
+    
+        <div className='bg-[#0f3430]  h-full py-32 text-white px-4 md:px-10 lg:px-40 '>
+               <h2><strong>Project Title: </strong>Blogging Website</h2>
+            <p><strong>Project Description:</strong> This project is a full-featured blogging website that allows
+             users to create, read, update, and delete blog posts. It is designed to provide a seamless platform 
+             for content sharing and community interaction. Registered users can write blog posts, edit or delete
+              their own content, and engage with other posts through likes, dislikes, and comments.
+            </p>
+            <div>
+                <Slider {...settings}>
+                {blog_images.map((img, index) => (
+                    <motion.div
+                    initial = {{opacity: 0, scale:0.8}}
+                    whileInView = {{opacity: 1, scale: 1}}
+                    transition = {{duration: 1}}
+                    viewport = {{once: true}}
+                    key={index}
+                    className='px-4 mt-6 pb-5'
+                    >  
+                   <img src={img} alt=""  onClick={() => setImageWidth(img)}/>
+                      </motion.div>
+                ))}
+           </Slider>
+            </div>
+            </div>  
+           )}
               {imageWidth && (
             <div className='fixed flex items-start inset-0 z-50 bg-black bg-opacity-70 overflow-y-auto'>
                 <div className='relative'>
@@ -156,7 +221,7 @@ const ProjectDetails = () => {
             </div>
             </div>
            )}
-           
+        
         </>
     )
 }

@@ -34,6 +34,7 @@ const Home = () => {
                 <li className='hover:text-[#0f3430] ' onClick={() => setMenuOpen(false)}><Link to="/">Home</Link></li>
                 <li className='hover:text-[#0f3430] cursor-pointer'  onClick={() => {navigate('/', { state: { scrollToAbout: true } }); setMenuOpen(false)}}>About</li>
                  <li className='hover:text-[#0f3430] cursor-pointer'  onClick={() => {navigate('/', { state: { scrollToProjects: true } }); setMenuOpen(false)}}>Projects</li>
+                 <li className='hover:text-[#0f3430] cursor-pointer'  onClick={() => {navigate('/', { state: { scrollToEducation: true } }); setMenuOpen(false)}}>Education</li>
                   <li className='hover:text-[#0f3430] cursor-pointer'  onClick={() => {navigate('/', { state: { scrollToExperience: true } }); setMenuOpen(false)}}>Experience</li>
                 <li className='hover:text-[#0f3430] cursor-pointer'  onClick={() => {navigate('/', { state: { scrollToContact: true } }); setMenuOpen(false)}}>Contact</li>
             </ul>

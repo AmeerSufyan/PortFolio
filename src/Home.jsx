@@ -3,16 +3,19 @@ import {Link, useLocation} from 'react-router-dom';
 import { motion } from 'framer-motion'
 import proj1 from './realstatepic.avif';
 import proj2 from './ecommercepic.jpg';
+import proj3 from './githubpic.webp';
+import proj4 from './blogproject.jpg';
 import pic1 from './portfoliopic.jpg';
 import emailjs from '@emailjs/browser';
-import {FaHome, FaShoppingBag} from 'react-icons/fa';
+import {FaHome, FaShoppingBag, FaGraduationCap, FaGithub, FaEdit} from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {useForm} from 'react-hook-form';
  
-const Home = ({scrollRef, projectRef, experienceRef, expertiseRef}) => {
-      const form = useRef();
-
-  const sendEmail = (e) => {
+const Home = ({scrollRef, projectRef, experienceRef, expertiseRef, educationRef}) => {
+  const form = useRef();
+  const {register, handleSubmit, formState: {errors}} = useForm();
+  const OnSubmit = (e) => {
     e.preventDefault();
 
     emailjs
@@ -50,6 +53,10 @@ const Home = ({scrollRef, projectRef, experienceRef, expertiseRef}) => {
     const expSection = document.getElementById('experience-section');
     if (expSection) expSection.scrollIntoView({ behavior: 'smooth' });
   }
+  if (location.state?.scrollToEducation) {
+    const eduSection = document.getElementById('education-section');
+    if (eduSection) eduSection.scrollIntoView({ behavior: 'smooth' });
+  }
       }, [location])
     return (
         <>    
@@ -73,12 +80,14 @@ const Home = ({scrollRef, projectRef, experienceRef, expertiseRef}) => {
              <div className='flex flex-col justify-center gap-y-4 mt-3 md:mt-0 order-1 md:order-2'>
               <div className='w-10 h-2 rounded-md bg-[#4ec18a]'></div>
               <h2 className='text-3xl font-poppins font-bold'>About</h2>
-              <p className='text-gray-300'>Hi! I'm a recent graduate with a passion for full-stack web development. I specialize in 
-                building responsive and dynamic websites using technologies like React.js, Django, Tailwind CSS, 
-                and MySQL.I'm  eager to improve my skills, and take on challenging development problems.
-                 Whether it's the frontend design or backend logic, I enjoy turning ideas into real-world 
-                 solutions that make an impact.I'm currently looking for opportunities to contribute to innovative
-                  teams where I can continue growing as a full-stack developer </p>
+              <p className='text-gray-300'>I am a passionate full-stack web developer with expertise in building
+               responsive and dynamic web applications using technologies such as React.js, Django, Tailwind CSS, 
+               and MySQL. I enjoy working on both frontend interfaces and backend logic, turning ideas into 
+               real-world solutions that deliver value and impact. I am eager to tackle challenging development
+                problems and continuously improve my skills. I am currently seeking opportunities to contribute
+                 to innovative teams and grow further as a full-stack developer.
+
+ </p>
                   <div className='mt-4  space-x-4 xl:space-x-7'>
                     <button className='p-2 h-10 xl:h-16 w-24 xl:w-32 rounded-full bg-white text-black hover:bg-[#4ec18a] hover:text-white'
                      onClick={() => projectRef.current?.scrollIntoView({ behavior: 'smooth' })}>Projects</button>
@@ -110,15 +119,61 @@ const Home = ({scrollRef, projectRef, experienceRef, expertiseRef}) => {
                      <FaShoppingBag/>
                       <p>E-Commerce Website (FreshCart)</p>
                       </div>
+                       <Link to="/projects/gists"> <img src={proj3} alt="" className='hover:scale-105 h-96 w-full'></img></Link>
+                    <div className='flex items-center gap-4'>
+                     <FaGithub/>
+                      <p>Github Gists</p>
+                      </div>
+                      <Link to="/projects/blogPost"> <img src={proj4} alt="" className='hover:scale-105 h-96 w-full'></img></Link>
+                    <div className='flex items-center gap-4'>
+                     <FaEdit/>
+                      <p>Blogging Website</p>
+                      </div>
                    </motion.div>
-                    <div className='absolute left-20 bottom-[-24px] bg-white w-6 h-14 -rotate-15'></div>
+                    <div className='absolute left-20 bottom-[-24px] bg-white w-6 h-14 z-10 -rotate-15'></div>
+                 </div>
+
+                  {/* Education section */}
+                   <div ref={educationRef} id="education-section" className='relative  px-4 md:px-10 lg:px-40  bg-[#0f3430] text-white  py-16 md:pt-24'>
+                   <div className='w-16 mb-4 h-2 rounded-md bg-[#4ec18a]'></div>
+                  <h2 className='font-poppins font-bold text-3xl '>Education</h2>
+                  <motion.div 
+                    initial = {{opacity: 0, y:30}}
+                   whileInView = {{opacity: 1, y:0}}
+                    transition =  {{duration: 1}}
+                    className=' mt-7 flex flex-col gap-y-10'
+                     >
+                      <div className='relative'>
+                    <FaGraduationCap className='text-3xl absolute text-[#4ec18a]'/>
+                    <div className=' h-45 md:h-40  ml-3 border-l-7 border-[#4ec18a]  text-white'>
+                      <div className='ml-10 mt-5 space-y-3'>
+                      <p className='bg-[#4ec18a] rounded-2xl w-30 text-center'>2018-2020</p>
+                      <h2 className='text-2xl'>Intermediate</h2>
+                      <p>In Pre-Engineering</p>
+                      <p>From Mahtab Khurshid Memorial School & College (Kotha), (Swabi)</p>
+                      </div>
+                    </div>
+                    </div>
+
+                     <div className='relative'>
+                    <FaGraduationCap className='text-3xl absolute  text-[#4ec18a]'/>
+                    <div className=' h-50 md:h-40  ml-3 border-l-7  border-[#4ec18a]  text-white'>
+                      <div className='ml-10 mt-5 space-y-3'>
+                      <p className='bg-[#4ec18a] rounded-2xl w-30 text-center'>2021-2025</p>
+                      <h2 className='text-2xl'>Bachelor Of Science In Computer Science</h2>
+                      <p>From Federal Urdu University Of Arts, Sciences & Technology Islamabad</p>
+                      <p>CGPA: 3.60</p>
+                    </div>
+                    </div>
+                    </div>
+                   </motion.div>
                  </div>
 
                  <div
                  initial = {{opacity: 0, y:50}}
                  whileInView ={{opacity:1, y:0}}
                  transtion = {{duration: 0.8}}
-                 className='pl-4 md:pl-10 lg:pl-40 text-white font-poppins pt-20 md:pt-24 bg-[#0f3430]' id="expertise-section" ref={expertiseRef}>
+                 className='pl-4 md:pl-10 lg:pl-40 text-white font-poppins pt-20 md:pt-16 bg-[#0f3430]' id="expertise-section" ref={expertiseRef}>
                 <div className='w-16 mb-4 h-2 rounded-md bg-[#4ec18a]'></div>
                 <h2 className='font-poppins text-3xl font-bold'>My Expertise</h2>
                 <motion.ul className='list-none mt-10 space-y-5 '>
@@ -167,26 +222,50 @@ const Home = ({scrollRef, projectRef, experienceRef, expertiseRef}) => {
                <div className="border-l-4 border-[#4ec18a] pl-6">
                <h3 className="text-xl font-semibold">Web Development Intern</h3>
                <p className="text-[#4ec18a] font-medium">Rutech Solutions</p>
-               <p className="text-sm italic mb-2">April 2025 – Present</p>
+               <p className="text-sm italic mb-2">April 2025 – July 2025</p>
               <p className="text-gray-300">
-              I am currently working as a Web Development Intern at Rutech Solutions, where I’m contributing to 
-              frontend and backend development using technologies like React.js, Django, MySQL and Tailwind CSS. 
-              My responsibilities include building user-friendly interfaces, integrating APIs, and assisting in 
-             full-stack project tasks to support live applications. This internship is helping me strengthen my 
-             practical skills and gain industry-level experience in real-world projects.
+             I completed my Web Development Internship at Rutech Solutions, where I contributed to both 
+             frontend and backend development using technologies such as React.js, Django, MySQL, and Tailwind
+              CSS. My responsibilities included building user-friendly interfaces, integrating APIs,
+               This experience strengthened my practical skills and provided valuable industry-level exposure.
+              </p>
+           </div>
+           <div className="border-l-4 border-[#4ec18a] pl-6 mt-10">
+               <h3 className="text-xl font-semibold">Web Development Intern</h3>
+               <p className="text-[#4ec18a] font-medium">HH Tech Hub</p>
+               <p className="text-sm italic mb-2">July 2025 – August 2025</p>
+              <p className="text-gray-300">
+            Developed responsive and interactive user interfaces with modern frontend technologies 
+            such as Next.js, collaborating with the development team to improve design, performance,
+             and overall user experience.
               </p>
            </div>
            </div>
-
-
-                  {/* Contact Form */}
+        
+        {/* Contact Form */}
                   <div ref={scrollRef} id="contact-form" className='bg-[#0f3430] py-24 text-white px-4 md:px-10 lg:px-40'>
-                    <form  ref={form} onSubmit={sendEmail}  className='flex flex-col  border border-white h-full rounded-full items-center gap-y-5 py-10'>
+                    <form  ref={form} onSubmit={handleSubmit(OnSubmit)}  className='flex flex-col  border border-white h-full rounded-full items-center gap-y-5 py-10'>
                       <h2 className='font-bold text-3xl'>Get In Touch</h2>
-                      <input type="text" name="name" placeholder='Enter your name' className=' border-b text-white p-2 w-[70%] focus:outline:none' required/>
-                      <input type="tel" name="phone" placeholder='Enter your phone' className='border-b text-white p-2 w-[70%] focus:outline:none' required/>
-                      <input type="email"  name="email" placeholder='Enter your email' className='border-b text-white p-2 w-[70%] focus:outline:none' required/>
-                      <textarea type="text" name="message" placeholder='Enter your message' className=' border-b text-white p-2 h-24 w-[70%] focus:outline:none' required/>
+                      <input type="text" name="name" placeholder='Enter your name' className=' border-b text-white p-2 w-[70%] focus:outline:none'
+                       {...register('name', {required: 'Name is required', pattern: {
+                        value: /^[A-Za-z\s]+$/,
+                        message: 'Only alphabets are allowed'
+                       }}, )}/>
+                     {errors.name && <p className='text-red-500'>{errors.name.message}</p> }
+                      <input type="tel" name="phone" placeholder='Enter your phone' 
+                      className='border-b text-white p-2 w-[70%] focus:outline:none'
+                      {...register('phone', {required: "Phone is required", pattern: {
+                        value: /^[0-9]+$/,
+                        message: "Only numbers are allowed", 
+                      }, maxLength: {value: 11, message: 'Phone number should be 11 digits'}})} />
+                      {errors.phone && <p className='text-red-500'>{errors.phone.message}</p>}
+                      <input type="email"  name="email" placeholder='Enter your email' 
+                      className='border-b text-white p-2 w-[70%] focus:outline:none'
+                      {...register('email', {required: 'Email is required', pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                        message: 'Email must contain @ symbol'}})
+                      }/>
+                      {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
+                      <textarea type="text" name="message" placeholder='Enter your message' className=' border-b text-white p-2 h-24 w-[70%] focus:outline:none' />
                       <button type="submit"  className='bg-[#4ec18a] text-black w-[35%] border border-transparent cursor-pointer hover:text-white hover:bg-[#0f3430] hover:border-[#4ec18a] py-2 '>Send Message</button>
                     </form>
         
