@@ -19,7 +19,8 @@ const Home = ({scrollRef, projectRef, experienceRef, expertiseRef, educationRef}
     e.preventDefault();
 
     emailjs
-      .sendForm('service_b1108xj', 'template_ux5au0z', form.current,  'gY21JhnMAF5_GdmIU',
+      .sendForm( import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID, form.current,   import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
       )
       .then(
         () => {
